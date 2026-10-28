@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 import { MeFieldsEditor } from '@/components/MeFieldsEditor';
-import { makeT } from '@/i18n';
 import type { Lang, Me, MeField } from '@/model/types';
 import { nowIso } from '@/model/util';
 import { describeRoot, usesFolderPicker } from '@/storage/fs';
@@ -35,7 +34,7 @@ function MeForm({ me }: { me: Me }) {
   };
 
   const changeLang = (l: Lang) => {
-    if (setLang(l)) notify(makeT(l)('onb.language'), makeT(l)('settings.languageRestart'));
+    setLang(l);
   };
 
   const changeFolder = async () => {

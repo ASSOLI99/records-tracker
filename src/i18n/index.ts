@@ -14,19 +14,34 @@ export function deviceLang(): Lang {
   }
 }
 
+/**
+ * Wraps a value in Unicode first-strong isolate marks so an inserted value in the other script
+ * (an English plan name inside an Arabic sentence, a number with a unit) keeps its own order
+ * instead of reshuffling the sentence around it.
+ */
+export function isolate(value: string | number): string {
+  return `⁨${value}⁩`;
+}
+
 export function makeT(lang: Lang): TFn {
   const dict: Record<string, string> = lang === 'ar' ? ar : en;
   return (key, params) => {
     let s = dict[key] ?? en[key] ?? key;
-    if (params) for (const [k, v] of Object.entries(params)) s = s.split(`{${k}}`).join(String(v));
-    return s;
+    if (!params) return s;
+    for (const [k, v] of Object.entries(params)) s = s.split(`{${k}}`).join(isolate(v));
+    // A leading right-to-left mark fixes the sentence direction to Arabic even when it starts with
+    // an inserted English value ("Weight: 92 kg ← 90 kg" would otherwise lay out left-to-right).
+    return lang === 'ar' ? `‏${s}` : s;
   };
 }
 
-/** Layout direction is a separate concern from language: it only flips after a restart. */
+/**
+ * The app lays itself out from the chosen language (see `useDir`), so a switch shows at once.
+ * The native flag is still kept in step so system UI (alerts, pickers, scroll edges) matches on
+ * the next launch.
+ */
 export const rtl = {
-  isRTL: () => I18nManager.isRTL,
-  /** Request the direction matching `lang`; returns true if a restart is needed. */
+  /** Request the native direction matching `lang`; returns true if it only applies after a restart. */
   apply(lang: Lang): boolean {
     const want = lang === 'ar';
     I18nManager.allowRTL(want);

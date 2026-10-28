@@ -61,7 +61,6 @@ export const en = {
   'settings.backup': 'Backup & restore',
   'settings.backupBodyAndroid': 'All your data is in the record-tracker folder shown above. To back up, copy that folder to Google Drive (Files app › long-press › Share/Copy). To restore on a new phone, copy it back and pick it here.',
   'settings.backupBodyIos': 'All your data is in Files › On My iPhone › Records Tracker › record-tracker. Copy that folder to iCloud Drive or Google Drive to back it up. Deleting the app deletes this folder, so back up first.',
-  'settings.languageRestart': 'Restart the app to finish switching the layout direction.',
   'settings.notifications': 'Notifications',
   'settings.notificationsDenied': 'Notifications are turned off for this app in your phone settings.',
 
@@ -318,6 +317,7 @@ export const en = {
   'notif.permission': 'Allow notifications in your phone settings to get reminders.',
 
   'event.status': '{name}: {from} → {to}',
+  'status.change': '{from} → {to}',
 } as const;
 
 export type StringKey = keyof typeof en;
@@ -382,7 +382,6 @@ export const ar: Record<StringKey, string> = {
   'settings.backup': 'النسخ الاحتياطي والاستعادة',
   'settings.backupBodyAndroid': 'كل بياناتك في مجلد record-tracker الظاهر أعلاه. للنسخ الاحتياطي انسخ المجلد إلى Google Drive (تطبيق الملفات › ضغطة مطوّلة › مشاركة/نسخ). وللاستعادة على هاتف جديد انسخه إليه واختره هنا.',
   'settings.backupBodyIos': 'كل بياناتك في الملفات › على iPhone › Records Tracker › record-tracker. انسخ المجلد إلى iCloud Drive أو Google Drive للنسخ الاحتياطي. حذف التطبيق يحذف هذا المجلد، فانسخه أولًا.',
-  'settings.languageRestart': 'أعد تشغيل التطبيق لإكمال تغيير اتجاه الواجهة.',
   'settings.notifications': 'الإشعارات',
   'settings.notificationsDenied': 'الإشعارات مغلقة لهذا التطبيق في إعدادات هاتفك.',
 
@@ -639,4 +638,5 @@ export const ar: Record<StringKey, string> = {
   'notif.permission': 'اسمح بالإشعارات من إعدادات هاتفك لتصلك التذكيرات.',
 
   'event.status': '{name}: {from} ← {to}',
+  'status.change': '{from} ← {to}',
 };

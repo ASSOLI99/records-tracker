@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import type { ComponentProps, ReactNode } from 'react';
 import {
-  I18nManager,
   Pressable,
   StyleSheet,
   Text,
@@ -12,7 +11,7 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import { alpha, useTheme } from './theme';
+import { ARABIC_FONT, alpha, useDir, useTheme } from './theme';
 
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
@@ -22,7 +21,9 @@ export function Icon({ name, size = 22, color, style }: { name: string; size?: n
 }
 
 /** Icons that point "forward/back" must mirror in RTL. */
-export const dirIcon = (ltr: string, rtl: string) => (I18nManager.isRTL ? rtl : ltr);
+export function useDirIcon(ltr: string, rtl: string): string {
+  return useDir().rtl ? rtl : ltr;
+}
 
 type Variant = 'display' | 'h1' | 'h2' | 'h3' | 'body' | 'small' | 'label' | 'tiny';
 
@@ -57,6 +58,8 @@ export function Txt({
         }
       : {}),
     ...(center ? { textAlign: 'center' } : {}),
+    // Cairo's Arabic marks sit above and below the Latin line box; give them room.
+    ...(th.font.body === ARABIC_FONT ? { lineHeight: Math.round((styles[variant].fontSize ?? 16) * 1.65) } : {}),
   };
   return (
     <Text numberOfLines={numberOfLines} style={[styles[variant], base, style]}>
@@ -173,6 +176,7 @@ export function Field({
   ...props
 }: TextInputProps & { label?: string; hint?: string }) {
   const th = useTheme();
+  const { rtl } = useDir();
   return (
     <View style={{ gap: 6 }}>
       {label ? <Txt variant="label" dim>{label}</Txt> : null}
@@ -193,8 +197,8 @@ export function Field({
             textAlignVertical: props.multiline ? 'top' : 'center',
             fontFamily: th.font.body,
             // TextInput alignment is not mirrored automatically.
-            textAlign: I18nManager.isRTL ? 'right' : 'left',
-            writingDirection: I18nManager.isRTL ? 'rtl' : 'ltr',
+            textAlign: rtl ? 'right' : 'left',
+            writingDirection: rtl ? 'rtl' : 'ltr',
           },
           style,
         ]}

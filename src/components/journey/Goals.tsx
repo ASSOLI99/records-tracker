@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Animated, BackHandler, I18nManager, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
+import { Animated, BackHandler, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { Difficulty, Goal, Priority } from '@/model/types';
 import { nowIso, uid } from '@/model/util';
 import { useApp } from '@/state/app';
 import { Btn, Field, Icon, IconBtn, ProgressBar, Row, Segmented, Toggle, Txt } from '@/ui/kit';
 import { Sheet, confirm, notify } from '@/ui/overlays';
-import { alpha, useTheme } from '@/ui/theme';
+import { alpha, useDir, useTheme } from '@/ui/theme';
 
 const PRIORITIES: Priority[] = ['low', 'medium', 'high', 'critical'];
 const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard', 'epic'];
@@ -70,6 +70,7 @@ export function GoalsDrawer({
   const th = useTheme();
   const { t } = useApp();
   const insets = useSafeAreaInsets();
+  const { rtl } = useDir();
   const { width } = useWindowDimensions();
   const panelW = Math.min(360, width * 0.86);
   const [anim] = useState(() => new Animated.Value(0));
@@ -92,7 +93,7 @@ export function GoalsDrawer({
   if (!mounted) return null;
   const done = goals.filter((g) => g.completed).length;
   // translateX isn't mirrored by RTL layout, so slide in from whichever edge is "start".
-  const hidden = I18nManager.isRTL ? panelW : -panelW;
+  const hidden = rtl ? panelW : -panelW;
 
   return (
     // Elevation keeps the drawer above the floating pin button on Android.
@@ -177,7 +178,7 @@ export function GoalsTab({ goals, onPress, top }: { goals: Goal[]; onPress: () =
       })}
     >
       <Icon name="flag-checkered" size={20} color={th.colors.primary} />
-      <Text style={{ color: th.colors.text, fontWeight: '800', fontSize: 11 }}>{goals.length ? `${done}/${goals.length}` : '+'}</Text>
+      <Text style={{ color: th.colors.text, fontWeight: '800', fontSize: 11, fontFamily: th.font.body }}>{goals.length ? `${done}/${goals.length}` : '+'}</Text>
     </Pressable>
   );
 }

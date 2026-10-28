@@ -151,7 +151,7 @@ export function StatusEditor({
             .map((h, i) => (
               <Row key={i} style={{ justifyContent: 'space-between' }}>
                 <Txt variant="small">
-                  {h.from || '—'} → {h.to || '—'}
+                  {t('status.change', { from: h.from || '—', to: h.to || '—' })}
                 </Txt>
                 <Txt variant="tiny" dim>
                   {dateTime(new Date(h.at), lang)}

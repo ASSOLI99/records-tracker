@@ -149,7 +149,7 @@ const MapRow = memo(function MapRow({
         >
           {item.current ? (
             <View style={{ backgroundColor: c.accent, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 6 }}>
-              <Text style={{ color: c.onPrimary, fontWeight: '900', fontSize: 10, letterSpacing: 1 }}>{t('journey.now')}</Text>
+              <Text style={{ color: c.onPrimary, fontWeight: '900', fontSize: 10, letterSpacing: th.letterSpacing, fontFamily: th.font.heading }}>{t('journey.now')}</Text>
             </View>
           ) : null}
           <Txt variant="small" numberOfLines={1} style={{ fontWeight: '800' }}>
@@ -185,7 +185,7 @@ const MapRow = memo(function MapRow({
             <Icon name={finished ? th.finishIcon : 'flag-checkered'} size={42} color={finished || props.endReached ? c.onPrimary : c.accent} />
           </NodeShape>
         </View>
-        <View style={{ position: 'absolute', top: mid + size / 2 + 4, alignSelf: 'center', alignItems: 'center', paddingHorizontal: 10, paddingVertical: 2, borderRadius: 10, backgroundColor: alpha(c.bg, 0.9) }}>
+        <View style={{ position: 'absolute', top: mid + size / 2 + 4, alignSelf: 'center', alignItems: 'center', paddingHorizontal: 18, paddingVertical: 2, borderRadius: 10, backgroundColor: c.bg }}>
           <Txt variant="h3" center>
             {finished ? t('journey.finished') : t('journey.finishLine')}
           </Txt>
@@ -298,7 +298,7 @@ function StepCard({ item, props }: { item: Extract<JourneyItem, { type: 'step' }
         <StepNode index={item.period.index} state={state} size={36} />
         {item.current ? (
           <View style={{ backgroundColor: c.accent, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6 }}>
-            <Text style={{ color: c.onPrimary, fontWeight: '900', fontSize: 9 }}>{t('journey.now')}</Text>
+            <Text style={{ color: c.onPrimary, fontWeight: '900', fontSize: 9, fontFamily: th.font.heading }}>{t('journey.now')}</Text>
           </View>
         ) : null}
       </View>

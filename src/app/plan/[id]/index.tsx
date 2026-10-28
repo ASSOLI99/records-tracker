@@ -18,7 +18,7 @@ import { useApp, usePlan } from '@/state/app';
 import { getTheme } from '@/themes/themes';
 import { Btn, Icon, Txt } from '@/ui/kit';
 import { confirm, notify } from '@/ui/overlays';
-import { ThemeProvider, alpha } from '@/ui/theme';
+import { ThemeProvider, alpha, localizeTheme, useDir } from '@/ui/theme';
 
 function ViewSwitcher({ value, onChange, theme }: { value: JourneyView; onChange: (v: JourneyView) => void; theme: ReturnType<typeof getTheme> }) {
   const { t } = useApp();
@@ -34,7 +34,7 @@ function ViewSwitcher({ value, onChange, theme }: { value: JourneyView; onChange
         return (
           <Pressable key={o.v} accessibilityLabel={o.label} onPress={() => onChange(o.v)} style={{ flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 12, paddingVertical: 9, borderRadius: 999, backgroundColor: active ? theme.colors.primary : 'transparent' }}>
             <Icon name={o.icon} size={18} color={active ? theme.colors.onPrimary : theme.colors.textDim} />
-            {active ? <Text style={{ color: theme.colors.onPrimary, fontWeight: '800', fontSize: 12 }}>{o.label}</Text> : null}
+            {active ? <Text style={{ color: theme.colors.onPrimary, fontWeight: '800', fontSize: 12, fontFamily: theme.font.body }}>{o.label}</Text> : null}
           </Pressable>
         );
       })}
@@ -45,7 +45,8 @@ function ViewSwitcher({ value, onChange, theme }: { value: JourneyView; onChange
 export default function PlanScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const plan = usePlan(id);
-  const { t, updatePlan } = useApp();
+  const { t, lang, updatePlan } = useApp();
+  const { direction } = useDir();
   const insets = useSafeAreaInsets();
   const [islandH, setIslandH] = useState(120);
   const [statusOpen, setStatusOpen] = useState(false);
@@ -75,7 +76,7 @@ export default function PlanScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [plan, tick]);
 
-  const theme = getTheme(plan?.themeId);
+  const theme = localizeTheme(getTheme(plan?.themeId), lang);
   const readOnly = !!plan?.finishedAt;
 
   const openStep = useCallback((key: string) => router.push(`/plan/${id}/step/${encodeURIComponent(key)}`), [id]);
@@ -88,7 +89,7 @@ export default function PlanScreen() {
 
   if (!plan || !derived) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, direction }}>
         <Txt dim>{t('step.notFound')}</Txt>
         <Btn label={t('common.back')} onPress={() => router.replace('/')} />
       </View>
@@ -162,7 +163,7 @@ export default function PlanScreen() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style={theme.dark ? 'light' : 'dark'} />
-      <LinearGradient colors={[theme.colors.bg, theme.colors.bg2]} style={{ flex: 1 }}>
+      <LinearGradient colors={[theme.colors.bg, theme.colors.bg2]} style={{ flex: 1, direction }}>
         {plan.view === 'map' ? <JourneyMap {...viewProps} /> : plan.view === 'cards' ? <JourneyCards {...viewProps} /> : <JourneyTimeline {...viewProps} />}
 
         <StatusIsland

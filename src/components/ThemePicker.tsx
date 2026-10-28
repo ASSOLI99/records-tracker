@@ -3,11 +3,12 @@ import { Pressable, Text, View } from 'react-native';
 import { useApp } from '@/state/app';
 import { THEMES, type Theme } from '@/themes/themes';
 import { Icon, Row } from '@/ui/kit';
-import { alpha } from '@/ui/theme';
+import { alpha, localizeTheme } from '@/ui/theme';
 import { NodeShape } from './NodeShape';
 
-export function ThemePreview({ theme, selected, onPress }: { theme: Theme; selected?: boolean; onPress?: () => void }) {
+export function ThemePreview({ theme: base, selected, onPress }: { theme: Theme; selected?: boolean; onPress?: () => void }) {
   const { lang } = useApp();
+  const theme = localizeTheme(base, lang);
   const c = theme.colors;
   return (
     <Pressable onPress={onPress} style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}>

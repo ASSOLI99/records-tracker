@@ -4,16 +4,17 @@ import type { ReactNode } from 'react';
 import { Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { TFn } from '@/i18n';
-import { IconBtn, Row, Txt, dirIcon } from './kit';
-import { alpha, useTheme } from './theme';
+import { IconBtn, Row, Txt, useDirIcon } from './kit';
+import { alpha, useDir, useTheme } from './theme';
 
 /** Themed full-screen background with safe-area padding. */
 export function Screen({ children, scroll = true, style, padded = true }: { children: ReactNode; scroll?: boolean; style?: StyleProp<ViewStyle>; padded?: boolean }) {
   const th = useTheme();
+  const { direction } = useDir();
   const insets = useSafeAreaInsets();
   const content: ViewStyle = { paddingTop: insets.top + 8, paddingBottom: insets.bottom + 24, paddingHorizontal: padded ? 18 : 0, gap: 18 };
   return (
-    <LinearGradient colors={[th.colors.bg, th.colors.bg2]} style={{ flex: 1 }}>
+    <LinearGradient colors={[th.colors.bg, th.colors.bg2]} style={{ flex: 1, direction }}>
       <StatusBar style={th.dark ? 'light' : 'dark'} />
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
         {scroll ? (
@@ -31,9 +32,10 @@ export function Screen({ children, scroll = true, style, padded = true }: { chil
 }
 
 export function Header({ title, onBack, right, subtitle }: { title: string; onBack?: () => void; right?: ReactNode; subtitle?: string }) {
+  const backIcon = useDirIcon('arrow-left', 'arrow-right');
   return (
     <Row style={{ justifyContent: 'space-between' }} gap={6}>
-      {onBack ? <IconBtn name={dirIcon('arrow-left', 'arrow-right')} onPress={onBack} label="back" /> : null}
+      {onBack ? <IconBtn name={backIcon} onPress={onBack} label="back" /> : null}
       <View style={{ flex: 1 }}>
         <Txt variant="h2" numberOfLines={1}>
           {title}
@@ -52,10 +54,12 @@ export function Header({ title, onBack, right, subtitle }: { title: string; onBa
 /** Bottom sheet modal with a title bar. Pass scroll={false} when the content is its own list. */
 export function Sheet({ visible, onClose, title, children, footer, scroll = true }: { visible: boolean; onClose: () => void; title: string; children: ReactNode; footer?: ReactNode; scroll?: boolean }) {
   const th = useTheme();
+  const { direction } = useDir();
   const insets = useSafeAreaInsets();
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose} statusBarTranslucent>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+      {/* A modal is its own native root, so it needs the direction set again. */}
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1, direction }}>
         <Pressable style={{ flex: 1, backgroundColor: alpha('#000000', 0.45) }} onPress={onClose} />
         <View
           style={{
