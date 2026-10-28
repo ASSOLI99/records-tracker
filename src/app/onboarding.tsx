@@ -7,7 +7,6 @@ import { describeRoot, usesFolderPicker } from '@/storage/fs';
 import { useApp } from '@/state/app';
 import { Btn, Card, Field, Icon, Row, Segmented, Txt } from '@/ui/kit';
 import { MeFieldsEditor } from '@/components/MeFieldsEditor';
-import { makeT } from '@/i18n';
 import { Screen, notify } from '@/ui/overlays';
 import { useTheme } from '@/ui/theme';
 
@@ -26,7 +25,7 @@ export default function Onboarding() {
   }, [phase, step]);
 
   const changeLang = (l: Lang) => {
-    if (setLang(l)) notify(makeT(l)('onb.language'), makeT(l)('settings.languageRestart'));
+    setLang(l);
   };
 
   const choose = async () => {

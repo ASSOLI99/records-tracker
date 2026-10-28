@@ -7,7 +7,7 @@ import { useApp } from '@/state/app';
 import { isIcon } from '@/themes/icons';
 import { Icon, IconBtn } from '@/ui/kit';
 import { notify } from '@/ui/overlays';
-import { alpha, useTheme } from '@/ui/theme';
+import { ARABIC_FONT, alpha, useTheme } from '@/ui/theme';
 
 const TIER_FONT = [18, 22, 26, 30, 34, 38, 44];
 const TIER_ICON = [18, 21, 24, 27, 30, 34, 38];
@@ -33,7 +33,7 @@ export function StreakBadge({ current, best }: { current: number; best: number }
       >
         <Icon name={tier >= 6 ? 'crown' : th.streakIcon} size={TIER_ICON[tier]} color={color} />
       </View>
-      <Text style={{ color, fontSize: TIER_FONT[tier], lineHeight: TIER_FONT[tier] + 4, fontWeight: '900', fontFamily: th.font.heading }}>{current}</Text>
+      <Text style={{ color, fontSize: TIER_FONT[tier], lineHeight: th.font.heading === ARABIC_FONT ? undefined : TIER_FONT[tier] + 4, fontWeight: '900', fontFamily: th.font.heading }}>{current}</Text>
     </Pressable>
   );
 }
@@ -70,7 +70,7 @@ function StatusChip({ s, onPress, compact }: { s: Status; onPress: () => void; c
       </View>
       <Text numberOfLines={1} style={{ color, fontSize: 15, fontWeight: '900', fontFamily: th.font.heading }}>
         {s.current || '—'}
-        {s.unit ? <Text style={{ fontSize: 10, fontWeight: '700' }}> {s.unit}</Text> : null}
+        {s.unit ? <Text style={{ fontSize: 10, fontWeight: '700', fontFamily: th.font.body }}> {s.unit}</Text> : null}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 1 }}>
         <Icon name={reached ? 'check-circle' : arrowFor(s)} size={11} color={reached ? th.colors.success : th.colors.textDim} />
@@ -176,7 +176,7 @@ export function StatusIsland({
         {showHandle ? (
           <Pressable onPress={toggle} hitSlop={10} style={{ alignItems: 'center', paddingVertical: 2, flexDirection: 'row', justifyContent: 'center', gap: 4 }}>
             <Icon name={open ? 'chevron-up' : 'chevron-down'} size={18} color={th.colors.textDim} />
-            {!open && extra.length ? <Text style={{ color: th.colors.textDim, fontSize: 10, fontWeight: '700' }}>{t('status.more', { n: extra.length })}</Text> : null}
+            {!open && extra.length ? <Text style={{ color: th.colors.textDim, fontSize: 10, fontWeight: '700', fontFamily: th.font.body }}>{t('status.more', { n: extra.length })}</Text> : null}
           </Pressable>
         ) : null}
       </View>

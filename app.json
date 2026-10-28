@@ -69,7 +69,54 @@
           "color": "#4f6bff"
         }
       ],
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Cairo",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/cairo_regular.ttf",
+                    "weight": 400
+                  },
+                  {
+                    "path": "./assets/fonts/cairo_medium.ttf",
+                    "weight": 500
+                  },
+                  {
+                    "path": "./assets/fonts/cairo_semibold.ttf",
+                    "weight": 600
+                  },
+                  {
+                    "path": "./assets/fonts/cairo_bold.ttf",
+                    "weight": 700
+                  },
+                  {
+                    "path": "./assets/fonts/cairo_extrabold.ttf",
+                    "weight": 800
+                  },
+                  {
+                    "path": "./assets/fonts/cairo_black.ttf",
+                    "weight": 900
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/cairo_regular.ttf",
+              "./assets/fonts/cairo_medium.ttf",
+              "./assets/fonts/cairo_semibold.ttf",
+              "./assets/fonts/cairo_bold.ttf",
+              "./assets/fonts/cairo_extrabold.ttf",
+              "./assets/fonts/cairo_black.ttf"
+            ]
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": false

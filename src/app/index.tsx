@@ -11,11 +11,11 @@ import { useApp } from '@/state/app';
 import { getTheme } from '@/themes/themes';
 import { Btn, Card, Icon, IconBtn, Row, Txt } from '@/ui/kit';
 import { Screen } from '@/ui/overlays';
-import { alpha, useTheme } from '@/ui/theme';
+import { alpha, localizeTheme, useTheme } from '@/ui/theme';
 
 function PlanCard({ plan }: { plan: Plan }) {
   const { t, lang } = useApp();
-  const th = getTheme(plan.themeId);
+  const th = localizeTheme(getTheme(plan.themeId), lang);
   const c = th.colors;
   const stats = useMemo(() => {
     const periods = computePeriods(plan);

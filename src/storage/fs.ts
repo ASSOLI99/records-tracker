@@ -6,7 +6,7 @@
 // reliably truncate, and SAF has no rename).
 import { Directory, File, Paths } from 'expo-file-system';
 import { Platform } from 'react-native';
-import type { TFn } from '@/i18n';
+import { isolate, type TFn } from '@/i18n';
 import type { Lang } from '@/model/types';
 
 export const ROOT_NAME = 'record-tracker';
@@ -227,12 +227,13 @@ export async function pickRoot(): Promise<{ root: Directory; existing: boolean }
 /** Readable location of the root for display. */
 export function describeRoot(root: Directory | null, t: TFn): string {
   if (!root) return '—';
-  if (!usesFolderPicker) return `${t('storage.ios')} › ${ROOT_NAME}`;
+  // Each segment is isolated so a mix of Arabic and English names keeps its order; '›' mirrors in RTL.
+  if (!usesFolderPicker) return [t('storage.ios'), ROOT_NAME].map(isolate).join(' › ');
   const last = root.uri.replace(/\/+$/, '').split('/').pop() ?? '';
   try {
     const id = decodeURIComponent(last);
     const [volume, path] = id.split(':');
-    return `${volume === 'primary' ? t('storage.internal') : volume} › ${(path ?? '').split('/').join(' › ')}`;
+    return [volume === 'primary' ? t('storage.internal') : volume, ...(path ?? '').split('/').filter(Boolean)].map(isolate).join(' › ');
   } catch {
     return root.uri;
   }
