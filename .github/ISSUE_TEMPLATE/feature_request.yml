@@ -1,0 +1,18 @@
+name: Feature idea · فكرة ميزة
+description: Suggest something new · اقترح شيئًا جديدًا
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What do you want to track or do? · ماذا تريد أن تتابع أو تفعل؟
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How should it work? · كيف تتخيل أن تعمل؟
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What do you do today instead? · ماذا تفعل حاليًا بدلًا من ذلك؟

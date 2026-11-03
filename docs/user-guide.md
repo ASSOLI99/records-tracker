@@ -1,57 +1,27 @@
-# Records Tracker
+# Records Tracker — User guide
 
-**Track any goal as a journey of steps, stored in files you own.**
+**English** · [العربية](user-guide.ar.md) · [← Back to README](../README.md)
 
-Records Tracker is an Android and iOS app (Expo SDK 58, React Native, TypeScript). Every goal
-is a *record plan*: a themed journey where a new step opens on your schedule, whether every day,
-every few hours, on your gym days or only when you add one. You fill each step from your own
-template (mood, notes, a to-do list, numbers, photos), track your current statuses against
-targets, tick off goals, and watch the journey grow like a game map.
-
-There is **no account and no server**. Everything is saved as plain files in one
-`record-tracker` folder on your phone, so you can back it up to Google Drive or iCloud by copying
-that folder. The app is fully bilingual: **English and Arabic**, with a right-to-left layout and
-the Cairo typeface for Arabic.
-
----
+Everything the app can do, screen by screen.
 
 ## Contents
 
-- [What you can track](#what-you-can-track)
-- [How to use the app](#how-to-use-the-app)
-  - [1. First launch](#1-first-launch)
-  - [2. Home](#2-home)
-  - [3. Create a record plan](#3-create-a-record-plan)
-  - [4. The journey screen](#4-the-journey-screen)
-  - [5. Filling in a step](#5-filling-in-a-step)
-  - [6. Statuses](#6-statuses)
-  - [7. Journey goals](#7-journey-goals)
-  - [8. Editing a plan later](#8-editing-a-plan-later)
-  - [9. Finishing a journey](#9-finishing-a-journey)
-  - [10. Language and layout direction](#10-language-and-layout-direction)
-  - [11. Backup and restore](#11-backup-and-restore)
-  - [12. Reminders](#12-reminders)
-- [For developers](#for-developers)
-- [App stores, notifications, widgets](#app-stores-notifications-widgets)
+- [1. First launch](#1-first-launch)
+- [2. Home](#2-home)
+- [3. Create a record plan](#3-create-a-record-plan)
+- [4. The journey screen](#4-the-journey-screen)
+- [5. Filling in a step](#5-filling-in-a-step)
+- [6. Statuses](#6-statuses)
+- [7. Journey goals](#7-journey-goals)
+- [8. Editing a plan later](#8-editing-a-plan-later)
+- [9. Finishing a journey](#9-finishing-a-journey)
+- [10. Language and layout direction](#10-language-and-layout-direction)
+- [11. Backup and restore](#11-backup-and-restore)
+- [12. Reminders](#12-reminders)
 
----
+## 1. First launch
 
-## What you can track
-
-| Example | Theme | Trigger | Step template |
-|---|---|---|---|
-| Losing weight ("Perfect shape journey") | Pulse Fitness | Daily | Mood (red/yellow/green), thoughts, to-do list (2 L water, 10k steps, no junk food, workout), progress photo |
-| Drinking water | Clean Minimal | Every 2 hours, 08:00–22:00 | Glasses of water (target 8), "reached my goal" yes/no |
-| Quitting a habit | Zen Garden | Daily | Did I keep it? yes/no, mood, what made it easy or hard |
-| Studying / deep work | Cyber Grid | Chosen weekdays | Focused minutes (target 120), today's tasks, what I learned |
-| Medicine | Clean Minimal | Set times: 08:00, 14:00, 20:00 | Took it? yes/no |
-| Anything event-driven | Any | Manual | Whatever you need |
-
----
-
-## How to use the app
-
-### 1. First launch
+<p align="center"><img src="images/screens/onb-en.jpg" width="230" alt=""></p>
 
 1. **Choose a language.** English or العربية. You can switch later in Settings, and the layout flips instantly.
 2. **Choose where your data lives.**
@@ -68,7 +38,9 @@ the Cairo typeface for Arabic.
    fill its value: height, birthday, goal weight, favourite sport… Tap **Skip for now** to do it
    later from **About me**.
 
-### 2. Home
+## 2. Home
+
+<p align="center"><img src="images/screens/home-en.jpg" width="230" alt=""></p>
 
 - **Hi, *name*.** Tap your avatar or the gear icon to open **About me / Settings** (profile
   details, language, data folder, backup help).
@@ -78,7 +50,9 @@ the Cairo typeface for Arabic.
 - **Completed journeys.** Plans you finished, with their completion date.
 - At the bottom: where your data is saved.
 
-### 3. Create a record plan
+## 3. Create a record plan
+
+<p align="center"><img src="images/screens/newplan-theme-en.jpg" width="230" alt=""> <img src="images/screens/newplan-trigger-en.jpg" width="230" alt=""></p>
 
 A four-step wizard:
 
@@ -120,7 +94,9 @@ A four-step wizard:
 Tap **Create plan**. A folder with the plan's name is created inside `record-tracker`, and you land
 on the journey.
 
-### 4. The journey screen
+## 4. The journey screen
+
+<p align="center"><img src="images/screens/journey-fitness-en.jpg" width="230" alt=""> <img src="images/screens/cards-en.jpg" width="230" alt=""></p>
 
 ```
 ┌────────────────────────────────────────┐
@@ -164,7 +140,9 @@ on the journey.
   **Edit plan**.
 - **Add step**: appears next to the view switcher when the trigger is *manual*.
 
-### 5. Filling in a step
+## 5. Filling in a step
+
+<p align="center"><img src="images/screens/step-en.jpg" width="230" alt=""></p>
 
 Tap any step to open it. Its title is set automatically from the trigger: the date for daily
 steps, "Week of …" for weekly ones, the month for monthly ones, and date and time for hourly ones.
@@ -189,7 +167,7 @@ Below the template fields:
 
 Filling a step counts toward your streak.
 
-### 6. Statuses
+## 6. Statuses
 
 Statuses are your **current state**, things that change over time like body weight, waist size,
 belt colour or savings. Each has:
@@ -217,7 +195,9 @@ How they're laid out in the island, for 0 to 7 statuses:
 
 Every change is also kept in the status's **History**. Deleting a status asks for confirmation.
 
-### 7. Journey goals
+## 7. Journey goals
+
+<p align="center"><img src="images/screens/goals-en.jpg" width="230" alt=""></p>
 
 Open the goals drawer from the tab on the start edge. Goals are the things you must achieve
 during this journey.
@@ -230,7 +210,7 @@ during this journey.
   your journey?"** If you say yes, a trophy marker appears on the map.
 - Tap a goal to edit or delete it. Every change asks for confirmation.
 
-### 8. Editing a plan later
+## 8. Editing a plan later
 
 All three edits are behind the 📌 pin:
 
@@ -249,13 +229,13 @@ All three edits are behind the 📌 pin:
   - **Reopen** a finished journey.
   - **Delete** the plan, which removes its folder, steps, notes and files after a confirmation.
 
-### 9. Finishing a journey
+## 9. Finishing a journey
 
 The **finish line** sits at the top of the map. Tap it whenever you're done. If the plan has an
 end rule (after N steps or on a date), it lights up when you reach the end. The journey moves to
 **Completed journeys** on Home and becomes read-only; you can reopen it from **Edit plan**.
 
-### 10. Language and layout direction
+## 10. Language and layout direction
 
 - Switch between **English** and **العربية** in **About me → Language**. The whole app, including
   open sheets, mirrors **immediately**.
@@ -267,7 +247,7 @@ end rule (after N steps or on a date), it lights up when you reach the end. The 
   Everything else mirrors: the streak, ✕, goals tab, pin and view switcher all swap sides in
   Arabic.
 
-### 11. Backup and restore
+## 11. Backup and restore
 
 Everything lives in one folder:
 
@@ -290,7 +270,7 @@ record-tracker/
   mid-save never leaves you without a complete copy.
 - **iOS warning:** deleting the app deletes its Documents folder. Back up first.
 
-### 12. Reminders
+## 12. Reminders
 
 Reminders are local notifications, scheduled on the phone with no server involved.
 
@@ -300,112 +280,3 @@ Reminders are local notifications, scheduled on the phone with no server involve
 
 You're asked for notification permission the first time you turn one on. Finished plans stop
 reminding you.
-
----
-
-## For developers
-
-### Run
-
-```bash
-npm install --legacy-peer-deps
-```
-
-```bash
-npx expo run:android
-```
-
-This needs a **development build**, not Expo Go: the app uses the folder picker, notifications,
-the Cairo font and other native modules. For iOS, run `npx expo run:ios` on a Mac.
-
-### Checks
-
-```bash
-npm run typecheck
-```
-
-```bash
-npx eslint src
-```
-
-```bash
-npm test
-```
-
-The tests cover trigger periods, trigger changes, end rules, streaks, progress and journey
-ordering (`src/model/__tests__`).
-
-### Build a standalone APK locally (Windows)
-
-```bash
-npx expo prebuild --platform android
-```
-
-```bash
-cd android && ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a -Pexpo.useLegacyPackaging=true
-```
-
-The APK is written to `android/app/build/outputs/apk/release/`.
-
-- **Windows path limit:** React Native's native (CMake) build breaks on Windows paths longer than
-  260 characters.
-  1. Build from a short folder such as `C:\rt`.
-  2. If the release build still fails, add
-     `externalNativeBuild { cmake { buildStagingDirectory = file("C:/c") } }` inside `android { }`
-     in `android/app/build.gradle`.
-
-  `android/` is generated, so re-add the line after each prebuild.
-- `-Pexpo.useLegacyPackaging=true` compresses the native libraries (about 31 MB down to 17 MB for
-  an arm64 APK).
-- A local release build is signed with the debug key. That's fine for sideloading; the Play Store
-  needs an upload key and an `.aab` build.
-
-### Code map
-
-| Path | What |
-|---|---|
-| `src/model/` | Pure logic: types, trigger periods (`periods.ts`), progress and streaks (`progress.ts`), journey items, presets, labels |
-| `src/storage/` | Folder access (`fs.ts`, aware of Android's folder-picker URIs) and plan, profile and attachment persistence (`repo.ts`) |
-| `src/state/app.tsx` | App state: setup phase, root folder, profile, plans, language |
-| `src/i18n/` | English and Arabic strings, bidi isolation, date formatting |
-| `src/ui/` | UI kit, theming, `useDir()` direction, sheets and dialogs, pickers |
-| `src/themes/` | The 6 themes and the icon catalogue and search |
-| `src/components/` | Theme picker, trigger and template editors, journey views, status island, goals drawer, pin menu |
-| `src/app/` | Routes (Expo Router): onboarding, home, about me, new plan, journey, step, edit screens |
-| `src/notifications.ts` | Local reminders built from each plan's current trigger |
-| `assets/fonts/` | Cairo, 6 weights (SIL Open Font License, `Cairo-OFL.txt`) |
-
-### Design decisions
-
-- **Direction follows the language, not the native RTL flag.** Screens and sheets set Yoga's
-  `direction` from `useDir()`, so switching language applies at once. The native flag is still
-  updated so system UI matches after the next launch.
-- **Bidi-safe strings.** Inserted values are wrapped in Unicode isolates, and Arabic sentences with
-  inserted values start with a right-to-left mark.
-- **Android storage uses the Storage Access Framework.** Writes there don't reliably truncate
-  existing files, and files can't be renamed, so JSON is always written to fresh files: backup first,
-  then main.
-- **Trigger changes add a segment from "now".** Template changes add a version. Filled steps keep a
-  snapshot of their fields.
-
----
-
-## App stores, notifications, widgets
-
-- **Google Play:** fine as built. The app never requests `MANAGE_EXTERNAL_STORAGE` or
-  `READ_MEDIA_*`. It uses the system folder picker and photo picker, and those permissions are
-  blocked in `app.json`. The release manifest has no storage, media or overlay permissions.
-  Data-safety form: no data collected or shared.
-- **App Store:** fine as built. iOS has no storage permission at all; the Documents folder exposed
-  in Files is the supported approach. Camera and photo usage strings are set. Privacy label:
-  *Data Not Collected*. There's no login, so review can't be blocked by a login problem.
-- **Notifications:** yes, fully local. Each plan is capped at 20 scheduled notifications, because
-  iOS allows 64 per app.
-- **Widgets:** possible but not built yet. SDK 58's `expo-widgets` covers iOS home and lock-screen
-  widgets and Android home-screen widgets. It needs a development build and an App Group; the app
-  would push the streak and today's progress to the widget.
-
-## Licence notes
-
-The Cairo font is © The Cairo Project Authors and licensed under the SIL Open Font License 1.1;
-see `assets/fonts/Cairo-OFL.txt`.
