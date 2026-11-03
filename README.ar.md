@@ -13,7 +13,7 @@
 ![React Native 0.88](https://img.shields.io/badge/React%20Native-0.88-61dafb?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-4f6bff)
-[![Latest release](https://img.shields.io/github/v/release/ASSOLI99/records-tracker?label=APK&color=7c4dff)](https://github.com/ASSOLI99/records-tracker/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download-APK-7c4dff?logo=android&logoColor=white)](https://github.com/ASSOLI99/records-tracker/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 <img src="docs/images/banner.jpg" alt="الشاشة الرئيسية وخريطة رحلة لياقة ورحلة بمظهر أركيد النيون" width="100%">
