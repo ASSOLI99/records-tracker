@@ -6,6 +6,7 @@ import { nowIso } from '@/model/util';
 import { describeRoot, usesFolderPicker } from '@/storage/fs';
 import { useApp } from '@/state/app';
 import { Btn, Card, Field, Icon, Row, Segmented, Txt } from '@/ui/kit';
+import { BackupActions } from '@/components/BackupActions';
 import { MeFieldsEditor } from '@/components/MeFieldsEditor';
 import { Screen, notify } from '@/ui/overlays';
 import { useTheme } from '@/ui/theme';
@@ -118,6 +119,8 @@ export default function Onboarding() {
           <Field value={name} onChangeText={setName} placeholder={t('onb.name.placeholder')} autoFocus returnKeyType="next" onSubmitEditing={() => name.trim() && setStep('extra')} />
           <Btn label={t('common.next')} disabled={!name.trim()} onPress={() => (name.trim() ? setStep('extra') : notify(t('onb.name.required')))} />
           {usesFolderPicker ? <Btn variant="ghost" label={t('common.back')} onPress={() => setStep('storage')} /> : null}
+          <View style={{ height: 1, backgroundColor: th.colors.border, marginVertical: 4 }} />
+          <BackupActions exportable={false} />
         </View>
       ) : null}
 
