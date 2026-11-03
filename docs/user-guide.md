@@ -285,6 +285,8 @@ reminding you.
 
 ## 13. Backup file (.zip)
 
+<p align="center"><img src="images/screens/backup-en.jpg" width="230" alt=""></p>
+
 Copying the folder works, but one file is easier to keep safe.
 
 - **Export:** open **About me › Backup & restore** and tap **Export backup (.zip)**. The app puts
