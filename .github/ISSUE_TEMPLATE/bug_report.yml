@@ -1,0 +1,41 @@
+name: Bug report · الإبلاغ عن خطأ
+description: Something doesn't work as expected · شيء لا يعمل كما ينبغي
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? · ماذا حدث؟
+      description: What did you do, what did you expect, and what happened instead? · ماذا فعلت، وماذا توقعت، وماذا حدث بدلًا من ذلك؟
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce · خطوات إعادة المشكلة
+      placeholder: |
+        1.
+        2.
+        3.
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform · المنصة
+      options: [Android, iOS]
+    validations:
+      required: true
+  - type: dropdown
+    id: lang
+    attributes:
+      label: App language · لغة التطبيق
+      options: [English, العربية, Both · الاثنتان]
+  - type: input
+    id: device
+    attributes:
+      label: Device and OS version · الجهاز وإصدار النظام
+      placeholder: Pixel 8, Android 16 / iPhone 15, iOS 26
+  - type: textarea
+    id: screens
+    attributes:
+      label: Screenshots · لقطات شاشة
+      description: Please don't share personal data from your record-tracker folder. · رجاءً لا تشارك بيانات شخصية من مجلد record-tracker.
