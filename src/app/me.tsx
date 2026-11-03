@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { BackupActions } from '@/components/BackupActions';
 import { MeFieldsEditor } from '@/components/MeFieldsEditor';
 import type { Lang, Me, MeField } from '@/model/types';
 import { nowIso } from '@/model/util';
@@ -70,15 +70,14 @@ function MeForm({ me }: { me: Me }) {
         </Card>
       </Section>
       <Section title={t('settings.backup')}>
-        <Card>
-          <View style={{ gap: 8 }}>
-            <Row>
-              <Icon name="cloud-upload-outline" color={th.colors.accent} />
-              <Txt variant="small" style={{ flex: 1 }}>
-                {usesFolderPicker ? t('settings.backupBodyAndroid') : t('settings.backupBodyIos')}
-              </Txt>
-            </Row>
-          </View>
+        <Card style={{ gap: 14 }}>
+          <BackupActions />
+          <Row style={{ alignItems: 'flex-start' }}>
+            <Icon name="information-outline" size={18} color={th.colors.textDim} />
+            <Txt variant="tiny" dim style={{ flex: 1 }}>
+              {usesFolderPicker ? t('settings.backupBodyAndroid') : t('settings.backupBodyIos')}
+            </Txt>
+          </Row>
         </Card>
       </Section>
     </Screen>

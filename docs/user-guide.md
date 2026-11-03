@@ -18,6 +18,8 @@ Everything the app can do, screen by screen.
 - [10. Language and layout direction](#10-language-and-layout-direction)
 - [11. Backup and restore](#11-backup-and-restore)
 - [12. Reminders](#12-reminders)
+- [13. Backup file (.zip)](#13-backup-file-zip)
+- [14. Home-screen widget (Android)](#14-home-screen-widget-android)
 
 ## 1. First launch
 
@@ -280,3 +282,35 @@ Reminders are local notifications, scheduled on the phone with no server involve
 
 You're asked for notification permission the first time you turn one on. Finished plans stop
 reminding you.
+
+## 13. Backup file (.zip)
+
+<p align="center"><img src="images/screens/backup-en.jpg" width="230" alt=""></p>
+
+Copying the folder works, but one file is easier to keep safe.
+
+- **Export:** open **About me › Backup & restore** and tap **Export backup (.zip)**. The app puts
+  your profile, every plan, all steps, notes and attachments into
+  `records-tracker-backup-YYYY-MM-DD.zip` and opens the share sheet. Choose Google Drive, iCloud
+  Drive, Files, email or any app.
+- **Restore:** tap **Restore from a backup file** and pick the `.zip`. The app shows how many plans
+  it contains and asks before changing anything.
+  - A plan with the same name as one in the backup is **replaced** by the backup's version.
+  - Plans that aren't in the backup **stay** as they are.
+  - Your name and details are replaced if the backup has them.
+- **New phone:** during first launch, after choosing where your data lives, the name page has
+  **Restore from a backup file** too, so you can skip retyping everything.
+- The file is a normal zip. You can open it on a computer; the plans are readable JSON.
+
+## 14. Home-screen widget (Android)
+
+Long-press an empty spot on your home screen, tap **Widgets**, and drag **Records Tracker** to
+the screen. It shows up to four active journeys, those with an open step first. Each has:
+
+- its **streak** 🔥 and name;
+- the state of the open step: **✓ Step done**, a percentage, or **Step waiting for you**;
+- a progress bar in the plan's theme colour.
+
+The widget follows your phone's light or dark mode, and refreshes whenever you change something in
+the app or leave it. The bottom line says when it was last updated. An iOS widget is planned.
+

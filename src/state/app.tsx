@@ -7,6 +7,7 @@ import { nowIso } from '@/model/util';
 import { pickRoot, readConfig, resolveRoot, writeConfig } from '@/storage/fs';
 import { deletePlanFolder, loadMe, loadPlans, savePlan, saveMe as writeMe, uniqueFolder } from '@/storage/repo';
 import { cancelPlanReminders, rescheduleAll, schedulePlanReminders } from '@/notifications';
+import { useWidgetSync } from '@/widgets/sync';
 
 export type Phase = 'loading' | 'needsStorage' | 'needsName' | 'ready';
 
@@ -150,6 +151,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     },
     [root],
   );
+
+  useWidgetSync(phase === 'ready', plans, t, lang);
 
   const value = useMemo<AppState>(
     () => ({ phase, root, me, plans, lang, t, setLang, pickFolder, reload, saveMe, addPlan, updatePlan, deletePlan }),

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Records Tracker",
     "slug": "records-tracker",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "records-tracker",
@@ -12,10 +12,12 @@
       "bundleIdentifier": "com.assoliindustries.recordstracker",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "buildNumber": "2"
     },
     "android": {
       "package": "com.assoliindustries.recordstracker",
+      "versionCode": 2,
       "adaptiveIcon": {
         "backgroundColor": "#5B5CFF",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -115,6 +117,26 @@
               "./assets/fonts/cairo_black.ttf"
             ]
           }
+        }
+      ],
+      [
+        "./plugins/with-android-widgets",
+        {
+          "widgets": [
+            {
+              "name": "Today",
+              "displayName": "Records Tracker",
+              "description": "Your journeys: streaks and today's step · رحلاتك: السلسلة وخطوة اليوم",
+              "android": {
+                "minWidth": 180,
+                "minHeight": 110,
+                "targetCellWidth": 3,
+                "targetCellHeight": 2,
+                "resizeMode": "both",
+                "initialLayout": "./src/widgets/TodayWidget.tsx"
+              }
+            }
+          ]
         }
       ]
     ],

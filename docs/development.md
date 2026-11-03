@@ -29,8 +29,58 @@ npm run lint
 npm test
 ```
 
-The tests cover trigger periods, trigger changes, end rules, streaks, progress and journey
-ordering (`src/model/__tests__`).
+The tests cover trigger periods, trigger changes, end rules, streaks, progress, journey ordering,
+backup archives and the widget (`src/model/__tests__`), plus backup export and restore against an
+in-memory file system (`src/storage/__tests__`).
+
+## Releases
+
+Every tag that starts with `v` builds a release APK on GitHub Actions
+([`.github/workflows/android.yml`](../.github/workflows/android.yml)) and publishes it to
+[GitHub Releases](https://github.com/ASSOLI99/records-tracker/releases).
+
+1. Bump `expo.version` and `expo.android.versionCode` in `app.json`, and `version` in `package.json`.
+2. Merge to `main`, then tag and push:
+
+```bash
+git tag v1.1.0
+```
+
+```bash
+git push origin v1.1.0
+```
+
+Pull requests and pushes that change native config build the same APK as a workflow artifact,
+without publishing a release.
+
+**Signing.** Without secrets the APK is signed with the debug key from the generated project. That
+is fine for sideloading, and every CI build uses the same key, so updates install over each other.
+For a release key, add these repository secrets:
+
+| Secret | Value |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64` | the `.jks` file, base64-encoded |
+| `ANDROID_KEYSTORE_PASSWORD` | the keystore password |
+| `ANDROID_KEY_ALIAS` | the key alias |
+| `ANDROID_KEY_PASSWORD` | the key password |
+
+Switching from the debug key to a release key means people must uninstall once (after a backup),
+because Android only installs updates signed with the same key.
+
+## Widget
+
+The Android home-screen widget is built with [`expo-widgets`](https://docs.expo.dev/versions/v58.0.0/sdk/widgets/)
+and `@expo/ui` (Jetpack Compose components rendered through Glance).
+
+- `src/widgets/TodayWidget.tsx` holds the layout. The `'widget'` directive turns it into a string
+  that runs in the widget's own JS runtime, so inside it use only its arguments, `@expo/ui`
+  components and modifiers, and plain JavaScript. It is also bundled alone at build time, so it must
+  not import app modules.
+- `src/model/widget.ts` decides what the widget shows (unit-tested), and `src/widgets/sync.ts`
+  pushes it when plans change and when the app goes to the background.
+- `plugins/with-android-widgets.js` applies only the Android half of the expo-widgets config plugin.
+  The iOS half would add a widget extension and an App Group, which need a SwiftUI layout and Apple
+  signing first.
 
 ## Build a standalone APK locally (Windows)
 
@@ -69,6 +119,8 @@ The APK is written to `android/app/build/outputs/apk/release/`.
 | `src/themes/` | The 6 themes and the icon catalogue and search |
 | `src/components/` | Theme picker, trigger and template editors, journey views, status island, goals drawer, pin menu |
 | `src/app/` | Routes (Expo Router): onboarding, home, about me, new plan, journey, step, edit screens |
+| `src/widgets/` | The Android home-screen widget layout and the code that keeps it updated |
+| `plugins/` | Local config plugins (Android-only widgets) |
 | `src/notifications.ts` | Local reminders built from each plan's current trigger |
 | `assets/fonts/` | Cairo, 6 weights (SIL Open Font License, `Cairo-OFL.txt`) |
 

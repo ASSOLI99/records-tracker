@@ -40,7 +40,58 @@ npm test
 <div dir="rtl">
 
 تغطي الاختبارات فترات المحفّزات، وتغيير المحفّزات، وقواعد النهاية، والسلاسل، والتقدم، وترتيب
-الرحلة (`src/model/__tests__`).
+الرحلة، وملفات النسخ الاحتياطي، والودجت (`src/model/__tests__`)، إضافةً إلى تصدير النسخة
+واستعادتها على نظام ملفات في الذاكرة (`src/storage/__tests__`).
+
+## الإصدارات
+
+كل وسم (tag) يبدأ بـ `v` يبني ملف APK على GitHub Actions
+([`.github/workflows/android.yml`](../.github/workflows/android.yml)) وينشره في
+[GitHub Releases](https://github.com/ASSOLI99/records-tracker/releases).
+
+1. حدّث `expo.version` و `expo.android.versionCode` في `app.json`، و `version` في `package.json`.
+2. ادمج إلى `main`، ثم أنشئ الوسم وادفعه:
+
+</div>
+
+```bash
+git tag v1.1.0
+```
+
+```bash
+git push origin v1.1.0
+```
+
+<div dir="rtl">
+
+طلبات الدمج والدفعات التي تغيّر الإعدادات الأصلية تبني ملف APK نفسه كـ artifact، دون نشر إصدار.
+
+**التوقيع.** دون أسرار (secrets) يُوقَّع الملف بمفتاح التصحيح من المشروع المولَّد. هذا مناسب للتثبيت
+اليدوي، وكل بناء في CI يستخدم المفتاح نفسه فتُثبَّت التحديثات فوق بعضها. ولاستخدام مفتاح إصدار أضف هذه
+الأسرار إلى المستودع:
+
+| السر | القيمة |
+|---|---|
+| `ANDROID_KEYSTORE_BASE64` | ملف `.jks` بترميز base64 |
+| `ANDROID_KEYSTORE_PASSWORD` | كلمة مرور المخزن |
+| `ANDROID_KEY_ALIAS` | اسم المفتاح |
+| `ANDROID_KEY_PASSWORD` | كلمة مرور المفتاح |
+
+الانتقال من مفتاح التصحيح إلى مفتاح إصدار يعني أن على المستخدمين إزالة التطبيق مرة واحدة (بعد أخذ نسخة
+احتياطية)، لأن أندرويد لا يثبّت تحديثًا إلا إذا وُقّع بالمفتاح نفسه.
+
+## الودجت
+
+ودجت الشاشة الرئيسية في أندرويد مبني بـ [`expo-widgets`](https://docs.expo.dev/versions/v58.0.0/sdk/widgets/)
+و `@expo/ui` (مكونات Jetpack Compose تُعرض عبر Glance).
+
+- `src/widgets/TodayWidget.tsx` فيه التصميم. التوجيه `'widget'` يحوّله إلى نص يعمل في بيئة JS خاصة
+  بالودجت، فلا تستخدم داخله إلا وسائطه ومكونات `@expo/ui` ومعدّلاته و JavaScript العادية. ويُبنى
+  منفردًا وقت البناء، فلا يجوز أن يستورد وحدات من التطبيق.
+- `src/model/widget.ts` يحدد ما يعرضه الودجت (وعليه اختبارات)، و `src/widgets/sync.ts` يرسله عند تغيّر
+  الخطط وعند خروجك من التطبيق.
+- `plugins/with-android-widgets.js` يطبّق جزء أندرويد فقط من إضافة expo-widgets. جزء iOS يضيف امتدادًا
+  للودجت و App Group، ويحتاجان أولًا تصميم SwiftUI وتوقيع Apple.
 
 ## بناء ملف APK مستقل محليًا (ويندوز)
 
@@ -82,6 +133,8 @@ cd android && ./gradlew assembleRelease -PreactNativeArchitectures=arm64-v8a -Pe
 | `src/themes/` | المظاهر الستة، وكتالوج الأيقونات والبحث فيه |
 | `src/components/` | منتقي المظهر، محررا المحفّزات والقوالب، عروض الرحلة، جزيرة الحالات، درج الأهداف، قائمة الدبوس |
 | `src/app/` | المسارات (Expo Router): البداية، الرئيسية، عنّي، خطة جديدة، الرحلة، الخطوة، شاشات التعديل |
+| `src/widgets/` | تصميم ودجت أندرويد والكود الذي يحدّثه |
+| `plugins/` | إضافات إعداد محلية (ودجت أندرويد فقط) |
 | `src/notifications.ts` | التذكيرات المحلية المبنية من المحفّز الحالي لكل خطة |
 | `assets/fonts/` | خط Cairo بستة أوزان (SIL Open Font License، `Cairo-OFL.txt`) |
 

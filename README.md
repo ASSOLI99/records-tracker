@@ -14,6 +14,8 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS-4f6bff)
 ![No account](https://img.shields.io/badge/account-none%20needed-22c55e)
+[![Latest release](https://img.shields.io/github/v/release/ASSOLI99/records-tracker?label=APK&color=7c4dff)](https://github.com/ASSOLI99/records-tracker/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 <img src="docs/images/banner.jpg" alt="Records Tracker: the home screen, a fitness journey map and a Neon Arcade journey" width="100%">
 
@@ -90,6 +92,8 @@ Each theme changes colours, node shapes, path style, icons and fonts.
 | 📊 **Statuses** | Up to 7 live values, such as weight, waist or savings. Each has a target and a direction (*lower*, *higher* or *matches*), a full history, and optional markers on the map. |
 | 🏆 **Journey goals** | Each goal has a priority and a difficulty. When you complete one, a trophy can appear on the map. |
 | 📎 **Notes and attachments** | Add notes, photos, videos and files to any step. Attachments are copied into the plan's own folder. |
+| 💾 **One-tap backup** | Export everything (plans, steps, notes, photos, videos) as one `.zip`, then save it to Drive, iCloud or anywhere. Restore it from the same screen, or on a new phone during setup. |
+| 📱 **Home-screen widget** | On Android, a widget shows your active journeys, their streaks and whether today's step is done. |
 | 🔔 **Local reminders** | You can be reminded when a new step opens, and get an optional daily nudge. No push server is involved. |
 | 🌍 **Arabic and English** | Full RTL mirroring, the Cairo font, bidi-safe mixed text, and live switching. |
 | 🔒 **Private by design** | No account, no analytics and no network calls. Store privacy label: *Data Not Collected*. |
@@ -122,7 +126,10 @@ record-tracker/
 - **Android:** you pick a folder with the system folder picker. The app never asks for access to
   all your files.
 - **iOS:** the folder is at *Files › On My iPhone › Records Tracker*.
-- **Restore:** pick the old folder on first launch. The app greets you with "Welcome back".
+- **Backup in one tap:** *About me › Backup & restore › Export backup (.zip)* puts the whole folder
+  in a single file and opens the share sheet.
+- **Restore:** use *Restore from a backup file*, or pick the old folder on first launch. The app
+  greets you with "Welcome back".
 - **Crash-safe saves:** each save writes a `.backup.json` first and then the main file.
 
 > [!WARNING]
@@ -130,7 +137,17 @@ record-tracker/
 
 ## Get the app
 
-There are no store releases yet. To build it yourself:
+### Android: download the APK
+
+1. Open the **[latest release](https://github.com/ASSOLI99/records-tracker/releases/latest)** and
+   download `records-tracker-<version>.apk`.
+2. Open the file on your phone and allow installing from that source if Android asks.
+3. To update, install the newer APK over the old one. Your data stays in your `record-tracker` folder.
+
+Requires Android 7.0 or later. To add the widget, long-press your home screen, tap **Widgets**, and
+choose **Records Tracker**.
+
+### Build it yourself
 
 ```bash
 git clone https://github.com/ASSOLI99/records-tracker.git
@@ -145,8 +162,8 @@ npx expo run:android
 ```
 
 On a Mac, run `npx expo run:ios` instead. The app needs a **development build**, not Expo Go,
-because it uses the folder picker, notifications and a bundled font. Instructions for a
-standalone APK are in [docs/development.md](docs/development.md).
+because it uses the folder picker, notifications, the widget and a bundled font. How releases are
+built is described in [docs/development.md](docs/development.md).
 
 ## Tech stack
 
@@ -196,9 +213,11 @@ All three also run in CI on every push and pull request.
 ## Roadmap
 
 - [ ] App Store and Google Play releases (upload key, `.aab`, store listing)
-- [ ] Home-screen widget showing today's step and the streak (`expo-widgets`)
+- [x] Home-screen widget on Android with streaks and today's step
+- [ ] The same widget on iOS (needs a SwiftUI layout and an App Group)
 - [ ] Charts for status history, plus a calendar heat-map of filled steps
-- [ ] One-tap backup export (a zip shared to Drive or iCloud)
+- [x] One-tap backup export and restore (`.zip`)
+- [x] Downloadable APK on every release
 - [ ] Dark mode for the app's own screens (home, settings, wizard)
 - [ ] Haptic feedback when you complete a step or a goal
 
@@ -209,6 +228,11 @@ Ideas and bug reports are welcome. Please [open an issue](https://github.com/ASS
 Pull requests are welcome. Read **[CONTRIBUTING.md](CONTRIBUTING.md)** first. In short: every
 user-facing string needs both an English and an Arabic version, every layout must work in RTL,
 and `typecheck`, `lint` and `test` must pass.
+
+## License
+
+Records Tracker is released under the **[MIT License](LICENSE)**. You may use, change and
+share it, including commercially, as long as the copyright notice stays with it.
 
 ## Credits
 
